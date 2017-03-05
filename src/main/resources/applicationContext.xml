@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <context:annotation-config/>
+    <context:component-scan base-package="studio.geek">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+    <util:properties id="jdbc" location="classpath:jdbc.properties"></util:properties>
+    <!--配置数据源 -->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="jdbcUrl" value="#{jdbc.url}"/>
+        <property name="driverClass" value="#{jdbc.driver}"/>
+        <property name="user" value="#{jdbc.user}"/>
+        <property name="password" value="#{jdbc.password}"/>
+        <property name="initialPoolSize" value="#{jdbc.initial}"/>
+        <property name="minPoolSize" value="#{jdbc.min}"/>
+        <property name="maxPoolSize" value="#{jdbc.max}"/>
+
+
+        <!-- 当获取连接失败重试次数 -->
+        <property name="acquireIncrement" value="#{jdbc.increment}"/>
+    </bean>
+
+    <!-- 配置mybatis sqlSessionFactoryBean工厂 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"></property>
+        <!-- 配置mapper映射文件 -->
+        <property name="mapperLocations"
+                  value="classpath:mapper/*.xml">
+        </property>
+        <!-- 配置MyBaties全局配置文件:mybatis-config.xml -->
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <!--配置别名-->
+        <property name="typeAliasesPackage" value="studio.geek.entity"/>
+    </bean>
+
+    <!-- 扫描dao接口包，动态实现dao接口，注入到spring容器中 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="studio.geek.dao"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+    </bean>
+
+
+    <bean id="filterMultipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="209715200"/>
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="resolveLazily" value="true"/>
+    </bean>
+
+
+    <!--<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">-->
+        <!--&lt;!&ndash; 定义默认的异常处理页面，当该异常类型的注册时使用 &ndash;&gt;-->
+        <!--<property name="defaultErrorView" value="error"></property>-->
+        <!--&lt;!&ndash; 定义异常处理页面用来获取异常信息的变量名，默认名为exception &ndash;&gt;-->
+        <!--<property name="exceptionAttribute" value="e"></property>-->
+        <!--&lt;!&ndash; 定义需要特殊处理的异常，用类名或完全路径名作为key，异常也页名作为值 &ndash;&gt;-->
+        <!--<property name="exceptionMappings">-->
+            <!--<props>-->
+                <!--<prop key="cn.basttg.core.exception.BusinessException">error-business</prop>-->
+                <!--<prop key="cn.basttg.core.exception.ParameterException">error-parameter</prop>-->
+
+                <!--&lt;!&ndash; 这里还可以继续扩展对不同异常类型的处理 &ndash;&gt;-->
+            <!--</props>-->
+        <!--</property>-->
+    <!--</bean>-->
+</beans>

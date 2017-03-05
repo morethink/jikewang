@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="studio.geek.dao.IHomeDao">
+
+
+    <resultMap id="currentMember" type="studio.geek.util.CurrentMember">
+        <result column="member_id" jdbcType="CHAR" property="memberId"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="sex" jdbcType="CHAR" property="sex"/>
+        <result column="photo" jdbcType="VARCHAR" property="photo"/>
+        <result column="direction" jdbcType="VARCHAR" property="direction"/>
+        <result column="introduction" jdbcType="VARCHAR" property="introduction"/>
+    </resultMap>
+
+    <select id="getAllOldMembers" resultType="Member">
+        SELECT `member_id`, `name`, `sex`, `photo`, `direction`, `introduction`, `company` FROM `member`
+        WHERE `company` IS NOT NULL
+        ORDER BY member_id
+    </select>
+
+    <select id="getCurrentMembersByGrade" parameterType="String" resultMap="currentMember">
+        SELECT `member_id`, `name`, `sex`, `photo`, `direction`, `introduction`, `company` FROM `member`
+        WHERE `member_id` LIKE #{_parameter}"%"
+        ORDER BY member_id
+    </select>
+
+    <select id="getAllProductions" resultType="Production">
+        SELECT `name`, `effectPicture`, `introduction`, `url` FROM `production`
+        ORDER BY `name`
+    </select>
+
+    <select id="getCandidateById" parameterType="String" resultType="Candidate">
+        select `candidate_id`,`name`,`school`,`major`,`direction` from `candidate`
+        WHERE `candidate_id` = #{_parameter}
+    </select>
+    <insert id="saveCandidate" parameterType="Candidate">
+        INSERT INTO `candidate` (`candidate_id`, `name`, `school`, `major`, `direction`,`introduction`)
+        VALUES (#{candidateId}, #{name}, #{school}, #{major},  #{direction},#{introduction})
+    </insert>
+</mapper>

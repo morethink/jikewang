@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="studio.geek.dao.IProductionDao">
+
+    <select id="getProductionByName" parameterType="String" resultType="Production">
+        SELECT `id`,`name`, `effectPicture`, `introduction`, `url` FROM `production`
+        WHERE name = #{name}
+    </select>
+
+    <insert id="saveProduction" parameterType="Production">
+        INSERT INTO production (`name`, `effectPicture`, `introduction`, `url`)
+        VALUES(#{name},#{effectPicture},#{introduction},#{url})
+    </insert>
+
+    <delete id="deleteProduction" parameterType="String">
+        delete from production where name = #{_parameter}
+    </delete>
+
+    <!--删除多个项目-->
+    <delete id="deleteProductions" parameterType="List">
+        delete from production where `name` in(
+        <foreach collection="list" item="item" separator=",">
+            #{item}
+        </foreach>
+        )
+    </delete>
+
+
+
+
+    <select id="listProductionsByName" parameterType="studio.geek.util.Page" resultType="Production">
+        SELECT `name`, `effectPicture`, `introduction`, `url` FROM `production`
+        WHERE name LIKE #{parameters.name}"%"
+        ORDER BY `${parameters.order}` ${parameters.orderType}
+    </select>
+
+    <select id="listProductions" parameterType="studio.geek.util.Page" resultType="Production">
+        SELECT `name`, `effectPicture`, `introduction`, `url` FROM `production`
+        ORDER BY `${parameters.order}` ${parameters.orderType}
+    </select>
+
+    <update id="updateProduction" parameterType="Production">
+        UPDATE production SET name = #{name}
+        <if test="effectPicture != null and !&quot;&quot;.equals(effectPicture.trim())">
+            ,effectPicture=#{effectPicture}
+        </if>
+            ,introduction=#{introduction}
+            ,url=#{url}
+        WHERE id = #{id}
+    </update>
+
+
+</mapper>

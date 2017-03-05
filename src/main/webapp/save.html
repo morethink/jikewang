@@ -1,0 +1,91 @@
+<!doctype html>
+<!--suppress JSUnresolvedFunction -->
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript" src="js/jquery-3.1.1.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.form.js"></script>
+    <script type="text/javascript">
+        function saveMember() {
+            var url = "/member/memberId";
+//            var url = "/member/memberId";
+            var form = new FormData(document.getElementById("member"));
+            console.log(url);
+//            form.append("_method", 'put');
+//             var req = new XMLHttpRequest();
+//             req.open("post", "${pageContex0           t.request.contextPath}/public/testupload", false);
+//             req.send(form);
+            $.ajax({
+                url: url,
+                type: 'post',
+//                contentType: 'application/json',
+                data: form,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    console.log(data);
+                    console.log("over..");
+                },
+                error: function (e) {
+                    alert("错误！！");
+                }
+            });
+        }
+
+        function saveProduction() {
+            var url = "/production";
+            var form = new FormData(document.getElementById("production"));
+            console.log(url);
+
+            $.ajax({
+                url: url,
+                type: 'post',
+                data: form,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    console.log(data);
+                    console.log("over..");
+                },
+                error: function (e) {
+                    alert("错误！！");
+                }
+            });
+        }
+    </script>
+
+</head>
+<body>
+<form id="member" method="post" name="formDada" enctype="multipart/form-data">
+    <input type="file" name="file"/>
+    <input type="text" name="memberId" id="memberId"/>
+    <input type="text" name="name"/>
+    <input type="text" name="sex"/>
+    <input type="text" name="photo"/>
+    <input type="text" name="direction"/>
+    <input type="text" name="introduction"/>
+    <input type="text" name="company"/>
+    <input type="button" value="添加成员" onclick="saveMember()"/>
+</form>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+
+<form id="production" method="post" enctype="multipart/form-data">
+    <input type="file" name="file"/>
+    <input type="text" name="name"/>
+    <input type="text" name="introduction"/>
+    <input type="text" name="url"/>
+    <input type="button" value="添加项目" onclick="saveProduction()"/>
+</form>
+
+</body>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="studio.geek.dao.IMemberDao">
+
+    <select id="getMemberByMemberId" parameterType="String" resultType="Member">
+        SELECT `id`,`member_id`, `name`, `sex`, `photo`, `direction`, `introduction`, `company` FROM `member`
+        WHERE `member_id` = #{_parameter}
+    </select>
+
+    <insert id="saveMember" parameterType="Member">
+    INSERT INTO `member` (`member_id`, `name`, `sex`, `photo`, `direction`, `introduction`, `company`)
+    VALUES(#{memberId},#{name},#{sex},#{photo},#{direction},#{introduction},#{company})
+    </insert>
+
+    <delete id="deleteMember" parameterType="String">
+    delete from member where member_id = #{_parameter}
+    </delete>
+
+    <!--删除多个成员-->
+    <delete id="deleteMembers" parameterType="List">
+        delete from member where member_id in(
+        <foreach collection="list" item="item" separator=",">
+            #{item}
+        </foreach>
+        )
+    </delete>
+
+    <select id="listMembersById" parameterType="studio.geek.util.Page" resultType="Member">
+        SELECT `member_id`, `name`, `sex`, `photo`, `direction`, `introduction`, `company` FROM `member`
+        WHERE `member_id` LIKE #{parameters.memberId}"%"
+        ORDER BY `${parameters.order}` ${parameters.orderType}
+    </select>
+
+
+    <select id="listMembersByName" parameterType="studio.geek.util.Page" resultType="Member">
+        select `member_id`, `name`, `sex`, `photo`, `direction`, `introduction`, `company` from member
+        WHERE `name` LIKE #{parameters.name}"%"
+        ORDER BY `${parameters.order}` ${parameters.orderType}
+    </select>
+
+    <select id="listCurrentMembers" parameterType="studio.geek.util.Page" resultType="Member">
+        SELECT `member_id`, `name`, `sex`, `photo`, `direction`, `introduction`, `company` from member
+        WHERE `company` IS NULL
+        ORDER BY `${parameters.order}` ${parameters.orderType}
+    </select>
+
+    <select id="listOldMembers" parameterType="studio.geek.util.Page" resultType="Member">
+        SELECT `member_id`, `name`, `sex`, `photo`, `direction`, `introduction`, `company` from member
+        WHERE `company` IS NOT NULL
+        order by `${parameters.order}` ${parameters.orderType}
+    </select>
+
+    <update id="updateMember" parameterType="Member">
+        UPDATE member SET
+        member_id=#{memberId}
+        ,name=#{name}
+        ,sex=#{sex}
+        <if test="photo != null and !&quot;&quot;.equals(photo.trim())">
+            ,photo=#{photo}
+        </if>
+        ,direction=#{direction}
+        ,introduction=#{introduction}
+        ,company=#{company}
+        WHERE id = #{id}
+    </update>
+
+</mapper>

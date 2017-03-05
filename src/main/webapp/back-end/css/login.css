@@ -1,0 +1,70 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+body{
+	background-image: url(../image/bg.jpg);
+	background-size: 100%;
+	font-family: "微软雅黑";
+}
+.title {
+	position: relative;
+	top: 46%;
+	width: 650px;
+	float: left;
+	color: #fff;
+	margin-top: 300px;
+	margin-left: 80px;
+	
+}
+.titleInfo{
+	text-align: right;
+	font-size: 20px;
+}
+.title h1 {
+	font-size: 48px;
+	font-weight: 900;
+	margin-bottom: 10px;
+	letter-spacing: 4px;
+}
+.login{
+	width: 350px;
+	height: 350px;
+	background: rgba(255,255,255,.1);
+	border: 1px solid rgba(255,255,255,.5);
+	border-radius: 10px;
+	margin-top: 200px;
+	float: right;
+	margin-right: 100px;
+}
+.login h2 {
+	margin-top: 45px;
+	margin-left: 10px;
+	color:#fff;
+	font-size: 32px;
+	font-weight: normal;
+}
+.userName, .password{
+	width: 275px;
+	height: 30px;
+	border-radius: 5px;
+	margin-left: 30px;
+	margin-top: 25px;
+	padding-left: 10px;
+	font-size: 14px;
+	font-family: "微软雅黑";
+}
+.btn{
+	width: 300px;
+	height: 50px;
+	font-family: "微软雅黑";
+	font-size: 16px;
+	line-height: 50px;
+	color: #fff;
+	background-color: #286090;
+	border-color: #204d74;
+	border-radius: 10px;
+	display: block;
+	margin: 0 auto;
+	margin-top: 50px;
+}

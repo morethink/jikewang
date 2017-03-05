@@ -1,0 +1,80 @@
+
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>form</title>
+	<style type="text/css">
+		.coat {
+			margin-top: 100px;
+			margin-left: 600px;
+		}
+		.coat2 {
+			margin-top: 80px;
+			margin-left: 600px;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload=function(){
+			var sub=document.getElementById('submit'),
+				sea=document.getElementById('search');
+			sea.onclick=function(){
+				var request=new XMLHttpRequest();
+				request.open("get","/home/saveCandidate?"+document.getElementById("memberid").value);
+				request.send();
+				request.onreadystatechange=function(){
+					if(request.readyState == 4){
+						if(request.status == 200){
+							var res=JSON.parse(request.responseText);
+							if(res.success == true){
+								document.getElementById('result').innerHTML=res.data;
+							}
+						}
+						// else{
+						// 	alert("再检查一下，佛祖都救不了你"+request.status)
+						// }
+					}
+				}
+			}
+			sub.onclick=function(){
+				var xhr=new XMLHttpRequest();
+				xhr.open("post","/home/saveCandidate");
+				var data="candidateId="+document.getElementById("candidateId").value
+						+"&name="+document.getElementById("name").value
+						+"&school="+document.getElementById("school").value
+						+"&major="+document.getElementById("major").value
+						+"&direction="+document.getElementById('direction').value;
+				xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+				xhr.send(data);
+				xhr.onreadystatechange=function(){
+					if(xhr.readyState == 4){
+						if(xhr.status == 200){
+
+							var data=JSON.parse(xhr.responseText);
+							console.log(data);
+//							alert(date.data.name);
+							//商量一下返回什么
+						}
+					}
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<div class="coat">
+		<h3>亲，请提交你的信息</h3>
+		<lable>学号：<input type="text" id="candidateId"></lable></br></br>
+		<lable>姓名：<input type="text" id="name"></lable></br></br>
+		<lable>学校：<input type="text" id="school"></lable></br></br>
+		<lable>专业：<input type="text" id="major"></lable></br></br>
+		<lable>方向：<input type="text" id="direction"></lable></br></br>
+		<button id="submit">提交</button>
+		<p id="result"></p>
+	</div>
+	<div class="coat2">
+		<label>输入你要查询的结果：<input type="text" id="memberid"></label></br>
+		<button id="search">查询</button>
+		<p id="result2"></p>
+	</div>
+</body>
+</html>

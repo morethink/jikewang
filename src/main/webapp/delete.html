@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="js/jquery-3.1.1.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript">
+        function deleteMember() {
+            var url = '/member/memberId/' + document.getElementById("memberId").value;
+            console.log(url);
+            $.ajax({
+                type: "post",//请求方式
+                url: url,  //发送请求地址
+                timeout: 30000,//超时时间：30秒
+                data: {
+                    "_method": "delete"
+                },
+                dataType: "json",//设置返回数据的格式
+                //请求成功后的回调函数 data为json格式
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function () { //请求出错的处理
+                    $("#result").text("请求出错");
+                }
+            });
+        }
+        function deleteProduction() {
+            var url = '/production/name/' + document.getElementById("productionName").value;
+            console.log(url);
+            $.ajax({
+                type: "post",//请求方式
+                url: url,  //发送请求地址
+                timeout: 30000,//超时时间：30秒
+                data: {
+                    "_method": "delete"
+                },
+                dataType: "json",//设置返回数据的格式
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function () { //请求出错的处理
+                    $("#result").text("请求出错");
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+<input type="text" id="memberId"/>
+<button onclick="deleteMember();">delete</button>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<input type="text" id="productionName"/>
+<button onclick="deleteProduction();">delete</button>
+</body>
+</html>

@@ -1,0 +1,95 @@
+
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>form</title>
+	<style type="text/css">
+		.coat {
+			margin-top: 100px;
+			margin-left: 600px;
+		}
+		.coat2 {
+			margin-top: 80px;
+			margin-left: 600px;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery-3.1.1.js"></script>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			info();
+		})
+		function info() {
+			$.ajax({
+				type: "get",//请求方式
+//                contentType:"application/json",
+//                url: "/member/listMembersById.action",//发送请求地址
+//                url: "/management/login.action",//发送请求地址
+//                url: "/management/login.action",//发送请求地址
+				url: "/TestServlet",//发送请求地址
+				timeout: 30000,//超时时间：30秒
+				dataType: "json",//设置返回数据的格式
+				//请求成功后的回调函数 data为json格式
+//                message: {
+//                    name: "李文浩"
+//                },
+				success: function (data) {
+					console.log(data);
+					if (data.length==0) {
+						console.log("data为空");
+					} else {
+						console.log("data非空");
+					}
+				},
+				error: function () {
+					$("#result").text("请求出错");
+				}
+			});
+		}
+		function sub() {
+
+			$.ajax({
+				type: "get",//请求方式
+                contentType:"application/json",
+				url: "/TestServlet",//发送请求地址
+				data: {
+					"candidateId": document.getElementById("candidateId").value
+					"name": document.getElementById("name").value,
+					"school": document.getElementById("school").value,
+					"major": document.getElementById("major").value,
+					"direction": document.getElementById('direction').value
+				},
+				timeout: 30000,//超时时间：30秒
+				dataType: "json",//设置返回数据的格式
+				success: function (data) {
+					console.log(data);
+					if (data.length == 0) {
+						console.log("data为空");
+					} else {
+						console.log("data非空");
+					}
+				},
+				error: function () {
+					$("#result").text("请求出错");
+				}
+			});
+		}
+
+	</script>
+</head>
+<body bgcolor="purple">
+	<div class="coat">
+		<h3>亲，请提交你的信息</h3>
+		<lable>学号：<input type="text" id="candidateId"></lable></br></br>
+		<lable>姓名：<input type="text" id="name"></lable></br></br>
+		<lable>学校：<input type="text" id="school"></lable></br></br>
+		<lable>专业：<input type="text" id="major"></lable></br></br>
+		<lable>方向：<input type="text" id="direction"></lable></br></br>
+
+		<input type="button" value="提" onclick="sub()"/>
+		<!--<button id="submit" onclick="sub()">提交</button>-->
+		<p id="result"></p>
+	</div>
+
+</body>
+</html>
