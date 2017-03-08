@@ -22,6 +22,9 @@
     </context:component-scan>
 
     <mvc:default-servlet-handler/>
+    <mvc:cors>
+        <mvc:mapping path="/**" />
+    </mvc:cors>
 
     <mvc:annotation-driven>
         <!--统一将前端传过来的空字符串转化为null-->

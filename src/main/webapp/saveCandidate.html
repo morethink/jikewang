@@ -37,7 +37,7 @@
 			}
 			sub.onclick=function(){
 				var xhr=new XMLHttpRequest();
-				xhr.open("post","/home/saveCandidate");
+				xhr.open("post","http://localhost:80/home/saveCandidate");
 				var data="candidateId="+document.getElementById("candidateId").value
 						+"&name="+document.getElementById("name").value
 						+"&school="+document.getElementById("school").value
