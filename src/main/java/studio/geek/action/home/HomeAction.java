@@ -8,7 +8,6 @@ import studio.geek.entity.Production;
 import studio.geek.exception.ErrorException;
 import studio.geek.service.HomeService;
 import studio.geek.util.CurrentMember;
-import studio.geek.util.JsonUtil;
 import studio.geek.util.Result;
 
 import java.util.List;
@@ -72,6 +71,8 @@ public class HomeAction {
         return result;
     }
 
+
+    @CrossOrigin(origins = "http://www.zhihu.com")
     @RequestMapping(value = "/allProductions", method = RequestMethod.GET)
     public Result getAllOldProductions() {
 
@@ -91,12 +92,11 @@ public class HomeAction {
 
     @RequestMapping(value = "/saveCandidate", method = RequestMethod.POST)
     public Result saveCandidate(Candidate candidate) {
-        JsonUtil.prettyPrint(candidate);
-        JsonUtil.prettyPrint(candidate);
         if (homeService.saveCandidate(candidate) == false) {
             throw new ErrorException("服务器出现问题");
         } else {
             return new Result(true, "欢迎加入极客大家庭");
         }
     }
+
 }

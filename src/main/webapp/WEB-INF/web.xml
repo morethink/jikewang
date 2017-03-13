@@ -5,13 +5,20 @@
          http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
     <!--&lt;!&ndash; Spring应用上下文， 理解层次化的ApplicationContext &ndash;&gt;-->
+
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:applicationContext.xml</param-value>
     </context-param>
+
+    <!--<listener>-->
+        <!--<listener-class>se.jiderhamn.classloader.leak.prevention.ClassLoaderLeakPreventorListener</listener-class>-->
+    <!--</listener>-->
+
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
+
     <servlet>
         <servlet-name>dispatcher</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -53,4 +60,6 @@
         <error-code>404</error-code>
         <location>/index.html</location>
     </error-page>
+
+
 </web-app>

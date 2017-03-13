@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript">
+        function consolePrint() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'http://localhost:80/home/allProductions', true);
+            xhr.send();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        console.log(JSON.parse(xhr.responseText));
+                    }
+                }
+            }
+
+
+            function println(data) {
+                console.log('haha')
+                console.log(data);
+            }
+
+            var url = "http://localhost:80/home/allProductions?&callback=println";
+            // 创建script标签，设置其属性
+            var script = document.createElement('script');
+            script.setAttribute('src', url);
+            // 把script标签加入head，此时调用开始
+            document.getElementsByTagName('head')[0].appendChild(script);
+        }
+
+        function println(data) {
+            console.log(data);
+            console.log('print');
+        }
+        function jsonp_test() {
+            $.ajax({
+                type: "get",
+                url: "http://localhost:80/home/allProductions",
+                dataType: "jsonp",
+                jsonp: "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
+                jsonpCallback: "println",
+                //请求成功后的回调函数 data为json格式
+//                success: function (data) {
+//                    console.log(data);
+//                    console.log('success');
+//                },
+                error: function () { //请求出错的处理
+                    alert("请求出错");
+                }
+            });
+        }
+    </script>
+</head>
+<body onload="jsonp_test()">
+</body>
+</html>
