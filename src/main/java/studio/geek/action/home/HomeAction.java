@@ -72,7 +72,7 @@ public class HomeAction {
     }
 
 
-    @CrossOrigin(origins = "http://www.zhihu.com")
+//    @CrossOrigin(origins = "http://www.cnblogs.com")
     @RequestMapping(value = "/allProductions", method = RequestMethod.GET)
     public Result getAllOldProductions() {
 

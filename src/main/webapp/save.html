@@ -7,13 +7,14 @@
     <title>Document</title>
     <script type="text/javascript" src="js/jquery-3.1.1.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/jquery.form.js"></script>
     <script type="text/javascript">
         function saveMember() {
             var url = "/member/memberId";
 //            var url = "/member/memberId";
             var form = new FormData(document.getElementById("member"));
             console.log(url);
+            console.log(form);
+
 //            form.append("_method", 'put');
 //             var req = new XMLHttpRequest();
 //             req.open("post", "${pageContex0           t.request.contextPath}/public/testupload", false);

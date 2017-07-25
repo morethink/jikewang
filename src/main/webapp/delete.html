@@ -10,11 +10,11 @@
             var url = '/member/memberId/' + document.getElementById("memberId").value;
             console.log(url);
             $.ajax({
-                type: "post",//请求方式
+                type: "delete",//请求方式
                 url: url,  //发送请求地址
                 timeout: 30000,//超时时间：30秒
                 data: {
-                    "_method": "delete"
+//                    "_method": "delete"
                 },
                 dataType: "json",//设置返回数据的格式
                 //请求成功后的回调函数 data为json格式

@@ -5,9 +5,74 @@
     <title>Title</title>
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript">
+
+
+        function GetQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null)return unescape(r[2]);
+            return null;
+        }
+
+        function getToken() {
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('post', '/api/oauth2/token/'
+                    + '?client_id=2a5a61da622688dadc55'
+                    + '&client_secret=b7f6282c8cc74c801c37245bcd0f5d5801633bc8'
+                    + '&grant_type=authorization_code'
+                    + '&code=' + (function (name) {
+                        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+                        var r = window.location.search.substr(1).match(reg);
+                        if (r != null)return unescape(r[2]);
+                        return null;
+                    })('code')
+                    + '&redirect_uri=http://www.morethink.cn/', true
+            );
+            xhr.send();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        console.log(xhr.responseText);
+
+                        var data = JSON.parse(xhr.responseText);
+
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('post', '/api/bdc/learning/', true);
+                        xhr.send('id=2877&access_token=E8ZYj59pNyacwIOjSyAQUYy2p5vGOE');
+                        xhr.onreadystatechange = function () {
+                            if (xhr.readyState == 4) {
+                                if (xhr.status == 200) {
+                                    console.log(xhr.responseText);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return token;
+        }
+
+
+        function addWord() {
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('post', '/api/bdc/learning/2877', true);
+            xhr.send('access_token=D0d4zPeC4RguHdxn7utHCpY8OTk2Tg');
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        console.log(xhr.responseText);
+                    }
+                }
+            }
+            alert('ee');
+        }
+        addWord();
+
         function consolePrint() {
             var xhr = new XMLHttpRequest();
-            xhr.open('GET', 'http://localhost:80/home/allProductions', true);
+            xhr.open('GET', '/api/account/?access_token=D0d4zPeC4RguHdxn7utHCpY8OTk2Tg', true);
             xhr.send();
             xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4) {
@@ -17,9 +82,43 @@
                 }
             }
 
+            var code;
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '/api/oauth2/authorize/?client_id=2a5a61da622688dadc55&response_type=code&state=123', true);
+            xhr.send();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        console.log(xhr.responseText)
+                    }
+                }
+            }
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'http://localhost:80/home/allProductions', true);
+            xhr.send();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        console.log(xhr.responseText)
+                    }
+                }
+            }
+            var data = {"message":"<p>反反复复付付付付付付付付付付付付付付 反反复复付付付付付</p>"};
+            var xhr = new XMLHttpRequest();
+            xhr.open('post', 'https://cqupt.class.gaoxiaobang.com/topic/265865/post/8987888/api?1491799396449', true);
+            xhr.setRequestHeader('Content-Type','application/json');
+            xhr.send(JSON.stringify(data));
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        console.log(xhr.responseText)
+                    }
+                }
+            }
+
 
             function println(data) {
-                console.log('haha')
                 console.log(data);
             }
 
@@ -30,29 +129,20 @@
             // 把script标签加入head，此时调用开始
             document.getElementsByTagName('head')[0].appendChild(script);
         }
-
-        function println(data) {
-            console.log(data);
-            console.log('print');
-        }
         function jsonp_test() {
             $.ajax({
                 type: "get",
                 url: "http://localhost:80/home/allProductions",
                 dataType: "jsonp",
-                jsonp: "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
+                jsonp: "callback",
                 jsonpCallback: "println",
-                //请求成功后的回调函数 data为json格式
-//                success: function (data) {
-//                    console.log(data);
-//                    console.log('success');
-//                },
-                error: function () { //请求出错的处理
+                error: function () {
                     alert("请求出错");
                 }
             });
         }
     </script>
+
 </head>
 <body onload="jsonp_test()">
 </body>

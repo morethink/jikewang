@@ -35,12 +35,10 @@ public class FileUtil {
         List<String> fileTypes = new ArrayList();
         fileTypes.add("jpg");
         fileTypes.add("jpeg");
-        fileTypes.add("bmp");
         fileTypes.add("gif");
         fileTypes.add("png");
         String fileName = file.getOriginalFilename();
         String ext = fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length());
-        //对扩展名进行小写转换
         ext = ext.toLowerCase();
         String path;
         String effectPictureAddress;
