@@ -16,13 +16,16 @@ CREATE TABLE `candidate` (
   `school` varchar(255) DEFAULT NULL COMMENT '学院',
   `major` varchar(255) DEFAULT NULL COMMENT '专业',
   `direction` varchar(255) DEFAULT NULL COMMENT '所选方向',
+  `introduction` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `candidate_id` (`candidate_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2015211002 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of candidate
 -- ----------------------------
+INSERT INTO `candidate` VALUES ('1', '1', '1', '1', '1', '1', null);
+INSERT INTO `candidate` VALUES ('2', '2', '2', '2', '2', '2', null);
 
 -- ----------------------------
 -- Table structure for member
@@ -39,7 +42,7 @@ CREATE TABLE `member` (
   `company` varchar(255) DEFAULT NULL COMMENT '就职公司',
   PRIMARY KEY (`id`),
   UNIQUE KEY `member_id` (`member_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of member
@@ -50,9 +53,9 @@ INSERT INTO `member` VALUES ('4', '2015210994', '李文浩', '男', 'images/memb
 INSERT INTO `member` VALUES ('5', '2015211105', '唐雅', '女', 'images/members/2015211105.jpg', '前端', '我是一个美女', '阿里巴巴网络技术有限公司');
 INSERT INTO `member` VALUES ('6', '2015211121', '陈俊臣', '男', 'images/members/2015211121.jpg', '前端', '我是一个帅哥', '阿里巴巴网络技术有限公司');
 INSERT INTO `member` VALUES ('7', '2015211138', '吴林霏', '', 'images/members/2015211138.jpg', '前端', '我是一个美女', '阿里巴巴网络技术有限公司');
-INSERT INTO `member` VALUES ('22', '88', '88', '', '', '', '', '');
+INSERT INTO `member` VALUES ('22', '8484', '88', '', '', '', '', '');
 INSERT INTO `member` VALUES ('25', '99', '99', '', '', '', '', '');
-INSERT INTO `member` VALUES ('29', '2015210990', '88', '', 'images/members/E:\\Synchronization\\javaprogram\\MyIDEAProgram\\Maven\\src\\main\\webapp\\images\\members\\14872584042632017-02-04_000027.jpg', '', '', '');
+INSERT INTO `member` VALUES ('26', '2015210990', '凌龙', '男', 'images/members/2015210991.jpg', '后台', '我是一个帅哥', '腾讯科技（深圳）有限公司');
 
 -- ----------------------------
 -- Table structure for production

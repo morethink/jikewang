@@ -37,13 +37,13 @@
 			}
 			sub.onclick=function(){
 				var xhr=new XMLHttpRequest();
-				xhr.open("post","http://localhost:80/home/saveCandidate");
-				var data="candidateId="+document.getElementById("candidateId").value
+				xhr.open("post","http://localhost/home/saveCandidate");
+				var data={"candidateId="+document.getElementById("candidateId").value
 						+"&name="+document.getElementById("name").value
 						+"&school="+document.getElementById("school").value
 						+"&major="+document.getElementById("major").value
-						+"&direction="+document.getElementById('direction').value;
-				xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+						+"&direction="+document.getElementById('direction').value};
+				xhr.setRequestHeader("Content-type","application/json");
 				xhr.send(data);
 				xhr.onreadystatechange=function(){
 					if(xhr.readyState == 4){
@@ -62,7 +62,7 @@
 </head>
 <body>
 	<div class="coat">
-		<h3>亲，请提交你的信息</h3>
+		<h3>亲，请提交你的信12息</h3>
 		<lable>学号：<input type="text" id="candidateId"></lable></br></br>
 		<lable>姓名：<input type="text" id="name"></lable></br></br>
 		<lable>学校：<input type="text" id="school"></lable></br></br>
