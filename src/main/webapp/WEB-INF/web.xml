@@ -12,7 +12,7 @@
     </context-param>
 
     <!--<listener>-->
-        <!--<listener-class>se.jiderhamn.classloader.leak.prevention.ClassLoaderLeakPreventorListener</listener-class>-->
+    <!--<listener-class>se.jiderhamn.classloader.leak.prevention.ClassLoaderLeakPreventorListener</listener-class>-->
     <!--</listener>-->
 
     <listener>
@@ -34,7 +34,6 @@
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
-
     <filter>
         <filter-name>MultipartFilter</filter-name>
         <filter-class>org.springframework.web.multipart.support.MultipartFilter</filter-class>
@@ -52,6 +51,16 @@
         <filter-name>HiddenHttpMethodFilter</filter-name>
         <servlet-name>dispatcher</servlet-name>
     </filter-mapping>
+    <!--<filter>-->
+        <!--<filter-name>httpPutFormFilter</filter-name>-->
+        <!--<filter-class>org.springframework.web.filter.HttpPutFormContentFilter</filter-class>-->
+    <!--</filter>-->
+    <!--<filter-mapping>-->
+        <!--<filter-name>httpPutFormFilter</filter-name>-->
+        <!--<servlet-name>dispatcher</servlet-name>-->
+        <!--&lt;!&ndash;<url-pattern>/</url-pattern>&ndash;&gt;-->
+    <!--</filter-mapping>-->
+
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>

@@ -54,7 +54,7 @@ public class MemberService {
             }
 
             String photoAddress;
-            if (!file.isEmpty()) {
+            if (file != null && !file.isEmpty()) {
                 photoAddress = fileUtil.upload(file);
                 member.setPhoto(photoAddress);
             }
@@ -180,6 +180,9 @@ public class MemberService {
         //判断是否修改学号
 
         Member originalMember = getMemberByMemberId(originalMemberId);
+        if (originalMember == null) {
+            throw new ErrorException("你的学号怕是填错了哦");
+        }
         if (!originalMemberId.equals(member.getMemberId())) {
             Member currentMember = getMemberByMemberId(member.getMemberId());
             if (currentMember != null) {

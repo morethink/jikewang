@@ -7,6 +7,7 @@
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript">
         function deleteMember() {
+            console.log("dd");
             var url = '/member/memberId/' + document.getElementById("memberId").value;
             console.log(url);
             $.ajax({
@@ -19,7 +20,8 @@
                 dataType: "json",//设置返回数据的格式
                 //请求成功后的回调函数 data为json格式
                 success: function (data) {
-                    console.log(data);
+                    alert(data.data);
+                    console.log("dd");
                 },
                 error: function () { //请求出错的处理
                     $("#result").text("请求出错");
@@ -48,6 +50,7 @@
     </script>
 </head>
 <body>
+<h3>删除成员</h3>
 <input type="text" id="memberId"/>
 <button onclick="deleteMember();">delete</button>
 <br/>
