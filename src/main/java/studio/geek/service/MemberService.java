@@ -34,10 +34,10 @@ public class MemberService {
         if (getMemberByMemberId(member.getMemberId()) != null) {
             throw new ErrorException("学号已存在");
         } else {
-            if (member.getMemberId() == null ) {
+            if (member.getMemberId() == null) {
                 throw new ErrorException("学号不为空");
             }
-            if (member.getName() == null ) {
+            if (member.getName() == null) {
                 throw new ErrorException("名字不为空");
             }
 
@@ -194,7 +194,7 @@ public class MemberService {
         //保存文件
         String photoAddress;
         boolean isDeletePhoto = false;
-        if (!file.isEmpty()) {
+        if (file != null && !file.isEmpty()) {
             photoAddress = fileUtil.upload(file);
             member.setPhoto(photoAddress);
             isDeletePhoto = true;

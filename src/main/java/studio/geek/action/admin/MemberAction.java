@@ -281,6 +281,7 @@ public class MemberAction {
     public Result updateMember(@RequestParam(value = "file", required = false) MultipartFile file,
                                @PathVariable String originalMemberId,
                                Member member) {
+        JsonUtil.prettyPrint(member);
         Result result = new Result();
         if (memberService.updateMember(file, member, originalMemberId) == false) {
             throw new ErrorException("修改失败");
