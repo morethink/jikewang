@@ -19,7 +19,7 @@
 
     <!--删除多个成员-->
     <delete id="deleteMembers" parameterType="List">
-        delete from member where member_id in(
+        delete from member where member_id in (
         <foreach collection="list" item="item" separator=",">
             #{item}
         </foreach>
@@ -31,7 +31,6 @@
         WHERE `member_id` LIKE #{parameters.memberId}"%"
         ORDER BY `${parameters.order}` ${parameters.orderType}
     </select>
-
 
     <select id="listMembersByName" parameterType="studio.geek.util.Page" resultType="Member">
         select `member_id`, `name`, `sex`, `photo`, `direction`, `introduction`, `company` from member

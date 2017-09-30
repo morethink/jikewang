@@ -67,7 +67,7 @@
 
     <error-page>
         <error-code>404</error-code>
-        <location>/index.html</location>
+        <location>/error_404</location>
     </error-page>
 
 

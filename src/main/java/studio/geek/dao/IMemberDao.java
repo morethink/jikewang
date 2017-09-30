@@ -2,7 +2,6 @@ package studio.geek.dao;
 
 import org.springframework.stereotype.Repository;
 import studio.geek.entity.Member;
-import studio.geek.util.CurrentMember;
 import studio.geek.util.Page;
 
 import java.util.List;

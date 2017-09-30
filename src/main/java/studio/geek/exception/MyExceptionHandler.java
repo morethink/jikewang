@@ -24,4 +24,9 @@ public class MyExceptionHandler {
         return new Result(true, "异常未处理");
     }
 
+    @ExceptionHandler(NullPointerException.class)
+    public Result handleNullPointerException(Exception e) {
+        e.printStackTrace();
+        return new Result(true, "空指针异常，前端检查传值，后端检查代码");
+    }
 }
